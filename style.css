@@ -1,0 +1,555 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f5f7fb;
+    color: #202124;
+}
+
+button,
+input,
+textarea,
+select {
+    font-family: inherit;
+}
+
+button {
+    cursor: pointer;
+}
+
+.hidden {
+    display: none !important;
+}
+
+
+/* Header */
+
+.topbar {
+    background: white;
+    padding: 18px 6%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 2px 12px rgba(0,0,0,.06);
+}
+
+.topbar h1 {
+    margin: 0;
+    font-size: 25px;
+}
+
+.topbar p {
+    margin: 5px 0 0;
+    color: #777;
+}
+
+.header-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.header-btn {
+    border: 0;
+    padding: 11px 16px;
+    border-radius: 10px;
+    background: #1769aa;
+    color: white;
+    font-weight: bold;
+}
+
+.header-btn.danger {
+    background: #d93025;
+}
+
+
+/* Hero */
+
+.hero {
+    padding: 45px 6%;
+    background: linear-gradient(
+        135deg,
+        #1769aa,
+        #2196f3
+    );
+    color: white;
+}
+
+.hero h2 {
+    margin: 0 0 10px;
+    font-size: 32px;
+}
+
+.hero p {
+    margin-bottom: 25px;
+    font-size: 17px;
+}
+
+.search-box {
+    max-width: 700px;
+    display: flex;
+    background: white;
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+.search-box input {
+    flex: 1;
+    border: 0;
+    outline: 0;
+    padding: 17px;
+    font-size: 16px;
+}
+
+.search-box button {
+    width: 60px;
+    border: 0;
+    background: white;
+    font-size: 20px;
+}
+
+
+/* Main */
+
+main {
+    width: 88%;
+    max-width: 1100px;
+    margin: 30px auto;
+}
+
+.section-title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+
+.section-title h2 {
+    margin: 0;
+}
+
+.section-title span {
+    color: #777;
+}
+
+
+/* Categories */
+
+.categories {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 14px;
+}
+
+.category {
+    border: 0;
+    background: white;
+    border-radius: 18px;
+    padding: 22px 10px;
+    box-shadow: 0 3px 15px rgba(0,0,0,.07);
+    transition: .2s;
+}
+
+.category:hover {
+    transform: translateY(-4px);
+}
+
+.category span {
+    display: block;
+    font-size: 32px;
+    margin-bottom: 10px;
+}
+
+
+/* Services */
+
+.services-section {
+    margin-top: 35px;
+}
+
+.services-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+}
+
+.service-card {
+    background: white;
+    padding: 18px;
+    border-radius: 17px;
+    box-shadow: 0 3px 15px rgba(0,0,0,.07);
+    transition: .2s;
+}
+
+.service-card:hover {
+    transform: translateY(-3px);
+}
+
+.service-top {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+.service-icon {
+    width: 55px;
+    height: 55px;
+    border-radius: 15px;
+    background: #e8f2ff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 27px;
+}
+
+.service-card h3 {
+    margin: 0 0 5px;
+}
+
+.service-card p {
+    margin: 4px 0;
+    color: #777;
+}
+
+.service-info {
+    margin-top: 15px;
+    padding-top: 12px;
+    border-top: 1px solid #eee;
+}
+
+.service-owner {
+    color: #1769aa !important;
+    font-weight: bold;
+}
+
+
+/* Buttons */
+
+.small-btn,
+.link-btn {
+    border: 0;
+    background: transparent;
+    color: #1769aa;
+    font-weight: bold;
+}
+
+.primary-btn,
+.publish-btn {
+    border: 0;
+    background: #1769aa;
+    color: white;
+    padding: 13px 22px;
+    border-radius: 12px;
+    font-weight: bold;
+}
+
+.danger-btn {
+    border: 0;
+    background: #d93025;
+    color: white;
+    padding: 9px 13px;
+    border-radius: 9px;
+    font-weight: bold;
+}
+
+.edit-btn {
+    border: 0;
+    background: #f1f3f4;
+    color: #1769aa;
+    padding: 9px 13px;
+    border-radius: 9px;
+    font-weight: bold;
+}
+
+
+/* Add */
+
+.add-section {
+    margin-top: 35px;
+    background: white;
+    border-radius: 20px;
+    padding: 25px;
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    box-shadow: 0 3px 15px rgba(0,0,0,.07);
+}
+
+.add-icon {
+    font-size: 35px;
+}
+
+.add-section div:nth-child(2) {
+    flex: 1;
+}
+
+.add-section h2 {
+    margin: 0 0 5px;
+}
+
+.add-section p {
+    margin: 0;
+    color: #777;
+}
+
+
+/* Account */
+
+.account-panel,
+.my-services,
+.admin-panel {
+    margin-top: 35px;
+    background: white;
+    padding: 25px;
+    border-radius: 20px;
+    box-shadow: 0 3px 15px rgba(0,0,0,.07);
+}
+
+.account-card {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    background: #f6f8fa;
+    padding: 20px;
+    border-radius: 15px;
+    margin-bottom: 15px;
+}
+
+.account-avatar {
+    width: 65px;
+    height: 65px;
+    border-radius: 50%;
+    background: #e8f2ff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 30px;
+}
+
+.account-info h3 {
+    margin: 0 0 8px;
+}
+
+.account-info p {
+    margin: 5px 0;
+    color: #777;
+}
+
+
+/* Admin */
+
+.admin-stats {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.stat-card {
+    background: #f6f8fa;
+    border-radius: 15px;
+    padding: 20px;
+    text-align: center;
+}
+
+.stat-card strong {
+    display: block;
+    font-size: 30px;
+    color: #1769aa;
+}
+
+.admin-item {
+    border: 1px solid #eee;
+    padding: 15px;
+    border-radius: 12px;
+    margin-bottom: 10px;
+}
+
+.admin-actions {
+    display: flex;
+    gap: 8px;
+    margin-top: 10px;
+    flex-wrap: wrap;
+}
+
+
+/* Empty */
+
+.empty {
+    background: white;
+    padding: 40px;
+    text-align: center;
+    border-radius: 18px;
+    color: #777;
+}
+
+.empty div {
+    font-size: 45px;
+}
+
+
+/* Modal */
+
+.modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,.55);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    z-index: 1000;
+}
+
+.modal-content {
+    background: white;
+    width: 100%;
+    max-width: 550px;
+    max-height: 90vh;
+    overflow-y: auto;
+    border-radius: 22px;
+    padding: 25px;
+    position: relative;
+}
+
+.close {
+    position: absolute;
+    left: 15px;
+    top: 12px;
+    border: 0;
+    background: #eee;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    font-size: 25px;
+}
+
+.modal-content h2 {
+    margin-top: 5px;
+}
+
+.modal-subtitle {
+    color: #777;
+}
+
+form label {
+    display: block;
+    margin-top: 14px;
+    margin-bottom: 7px;
+    font-weight: bold;
+}
+
+form input,
+form select,
+form textarea {
+    width: 100%;
+    padding: 13px;
+    border: 1px solid #ddd;
+    border-radius: 11px;
+    outline: none;
+    font-size: 15px;
+}
+
+form textarea {
+    min-height: 100px;
+    resize: vertical;
+}
+
+.publish-btn {
+    width: 100%;
+    margin-top: 22px;
+    font-size: 17px;
+}
+
+
+/* Details */
+
+.details-icon {
+    font-size: 55px;
+    text-align: center;
+}
+
+.details-title {
+    text-align: center;
+    font-size: 25px;
+    margin: 10px 0;
+}
+
+.details-provider {
+    text-align: center;
+    color: #777;
+}
+
+.detail-row {
+    background: #f6f7f9;
+    margin-top: 12px;
+    padding: 14px;
+    border-radius: 12px;
+}
+
+
+/* Footer */
+
+footer {
+    text-align: center;
+    color: #888;
+    padding: 30px;
+}
+
+
+/* Mobile */
+
+@media (max-width: 800px) {
+
+    .categories {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .services-list {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+@media (max-width: 500px) {
+
+    .topbar {
+        padding: 15px;
+        gap: 10px;
+    }
+
+    .topbar h1 {
+        font-size: 20px;
+    }
+
+    .header-actions {
+        flex-direction: column;
+    }
+
+    .hero {
+        padding: 30px 15px;
+    }
+
+    main {
+        width: 92%;
+    }
+
+    .categories {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .add-section {
+        flex-wrap: wrap;
+    }
+
+    .add-section button {
+        width: 100%;
+    }
+
+    .admin-stats {
+        grid-template-columns: 1fr;
+    }
+
+}

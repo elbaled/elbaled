@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>خدمة أهل البلد</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header class="topbar">
+    <div>
+        <h1>خدمة أهل البلد</h1>
+        <p>كل خدمات بلدك في مكان واحد</p>
+    </div>
+
+    <div class="header-actions">
+        <button id="accountBtn" class="header-btn">👤 الحساب</button>
+        <button id="logoutBtn" class="header-btn danger hidden">تسجيل الخروج</button>
+    </div>
+</header>
+
+<section class="hero">
+
+    <h2>أهلاً بيك 👋</h2>
+
+    <p>
+        اكتشف الخدمات والمحلات والحرفيين القريبين منك
+    </p>
+
+    <div class="search-box">
+        <input
+            id="searchInput"
+            type="text"
+            placeholder="ابحث عن خدمة أو اسم مقدم الخدمة..."
+        >
+
+        <button id="searchBtn">🔍</button>
+    </div>
+
+</section>
+
+<main>
+
+    <!-- التصنيفات -->
+
+    <section>
+
+        <div class="section-title">
+            <h2>التصنيفات</h2>
+        </div>
+
+        <div class="categories">
+
+            <button class="category" data-category="مطاعم">
+                <span>🍔</span>
+                <b>مطاعم</b>
+            </button>
+
+            <button class="category" data-category="صيدليات">
+                <span>💊</span>
+                <b>صيدليات</b>
+            </button>
+
+            <button class="category" data-category="حرفيين">
+                <span>🔧</span>
+                <b>حرفيين</b>
+            </button>
+
+            <button class="category" data-category="محلات">
+                <span>🛒</span>
+                <b>محلات</b>
+            </button>
+
+            <button class="category" data-category="مواصلات">
+                <span>🚕</span>
+                <b>مواصلات</b>
+            </button>
+
+            <button class="category" data-category="وظائف">
+                <span>💼</span>
+                <b>وظائف</b>
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <!-- الخدمات -->
+
+    <section class="services-section">
+
+        <div class="section-title">
+
+            <h2 id="servicesTitle">
+                الخدمات المتاحة
+            </h2>
+
+            <div>
+                <span id="serviceCount">0 خدمة</span>
+
+                <button id="showAllBtn" class="small-btn">
+                    عرض الكل
+                </button>
+            </div>
+
+        </div>
+
+        <div id="servicesList" class="services-list"></div>
+
+        <div id="emptyMessage" class="empty hidden">
+
+            <div>🔎</div>
+
+            <h3>
+                مش لاقيين خدمة
+            </h3>
+
+            <p>
+                جرب كلمة بحث مختلفة
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- إضافة خدمة -->
+
+    <section class="add-section">
+
+        <div class="add-icon">
+            ➕
+        </div>
+
+        <div>
+            <h2>
+                أضف خدمتك
+            </h2>
+
+            <p>
+                اعرض خدمتك لأهل البلد
+            </p>
+        </div>
+
+        <button id="openAddBtn">
+            إضافة خدمة
+        </button>
+
+    </section>
+
+
+    <!-- خدماتي -->
+
+    <section id="myServicesSection" class="my-services hidden">
+
+        <div class="section-title">
+
+            <h2>
+                خدماتي
+            </h2>
+
+            <span id="myServicesCount">
+                0
+            </span>
+
+        </div>
+
+        <div
+            id="myServicesList"
+            class="services-list"
+        ></div>
+
+    </section>
+
+
+    <!-- لوحة الحساب -->
+
+    <section id="accountSection" class="account-panel hidden">
+
+        <div class="section-title">
+            <h2>
+                حسابي
+            </h2>
+        </div>
+
+        <div class="account-card">
+
+            <div class="account-avatar">
+                👤
+            </div>
+
+            <div class="account-info">
+
+                <h3 id="accountName">
+                    -
+                </h3>
+
+                <p id="accountEmail">
+                    -
+                </p>
+
+                <p id="accountPhone">
+                    -
+                </p>
+
+            </div>
+
+        </div>
+
+        <button
+            id="editAccountBtn"
+            class="primary-btn"
+        >
+            ✏️ تعديل بيانات الحساب
+        </button>
+
+    </section>
+
+
+    <!-- لوحة Admin -->
+
+    <section
+        id="adminSection"
+        class="admin-panel hidden"
+    >
+
+        <div class="section-title">
+
+            <h2>
+                🛠️ لوحة الإدارة
+            </h2>
+
+        </div>
+
+        <div class="admin-stats">
+
+            <div class="stat-card">
+                <strong id="adminUsersCount">0</strong>
+                <span>المستخدمون</span>
+            </div>
+
+            <div class="stat-card">
+                <strong id="adminServicesCount">0</strong>
+                <span>الخدمات</span>
+            </div>
+
+        </div>
+
+        <h3>
+            إدارة الخدمات
+        </h3>
+
+        <div id="adminServicesList"></div>
+
+        <h3>
+            إدارة المستخدمين
+        </h3>
+
+        <div id="adminUsersList"></div>
+
+    </section>
+
+</main>
+
+
+<!-- نافذة تسجيل الدخول -->
+
+<div
+    id="loginModal"
+    class="modal hidden"
+>
+
+    <div class="modal-content">
+
+        <button
+            id="closeLogin"
+            class="close"
+        >
+            ×
+        </button>
+
+        <h2>
+            تسجيل الدخول
+        </h2>
+
+        <p class="modal-subtitle">
+            ادخل إلى حسابك
+        </p>
+
+        <form id="loginForm">
+
+            <label>
+                البريد الإلكتروني
+            </label>
+
+            <input
+                id="loginEmail"
+                type="email"
+                required
+                placeholder="example@email.com"
+            >
+
+            <label>
+                كلمة المرور
+            </label>
+
+            <input
+                id="loginPassword"
+                type="password"
+                required
+                placeholder="كلمة المرور"
+            >
+
+            <button
+                type="submit"
+                class="publish-btn"
+            >
+                تسجيل الدخول
+            </button>
+
+        </form>
+
+        <button
+            id="openRegisterFromLogin"
+            class="link-btn"
+        >
+            ليس لديك حساب؟ إنشاء حساب
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- إنشاء حساب -->
+
+<div
+    id="registerModal"
+    class="modal hidden"
+>
+
+    <div class="modal-content">
+
+        <button
+            id="closeRegister"
+            class="close"
+        >
+            ×
+        </button>
+
+        <h2>
+            إنشاء حساب
+        </h2>
+
+        <p class="modal-subtitle">
+            أنشئ حسابك في خدمة أهل البلد
+        </p>
+
+        <form id="registerForm">
+
+            <label>
+                الاسم
+            </label>
+
+            <input
+                id="registerName"
+                required
+                placeholder="اكتب اسمك"
+            >
+
+            <label>
+                البريد الإلكتروني
+            </label>
+
+            <input
+                id="registerEmail"
+                type="email"
+                required
+                placeholder="example@email.com"
+            >
+
+            <label>
+                رقم الهاتف
+            </label>
+
+            <input
+                id="registerPhone"
+                type="tel"
+                required
+                placeholder="01000000000"
+            >
+
+            <label>
+                كلمة المرور
+            </label>
+
+            <input
+                id="registerPassword"
+                type="password"
+                minlength="6"
+                required
+                placeholder="6 أحرف على الأقل"
+            >
+
+            <button
+                type="submit"
+                class="publish-btn"
+            >
+                إنشاء الحساب
+            </button>
+
+        </form>
+
+        <button
+            id="openLoginFromRegister"
+            class="link-btn"
+        >
+            لديك حساب؟ تسجيل الدخول
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- إضافة خدمة -->
+
+<div
+    id="addModal"
+    class="modal hidden"
+>
+
+    <div class="modal-content">
+
+        <button
+            id="closeAdd"
+            class="close"
+        >
+            ×
+        </button>
+
+        <h2 id="serviceModalTitle">
+            إضافة خدمة جديدة
+        </h2>
+
+        <p class="modal-subtitle">
+            اكتب بيانات الخدمة
+        </p>
+
+        <form id="serviceForm">
+
+            <input
+                id="editServiceId"
+                type="hidden"
+            >
+
+            <label>
+                اسم الخدمة
+            </label>
+
+            <input
+                id="serviceName"
+                required
+                placeholder="مثال: مطعم أهل البلد"
+            >
+
+            <label>
+                التصنيف
+            </label>
+
+            <select id="category" required>
+
+                <option value="مطاعم">
+                    مطاعم
+                </option>
+
+                <option value="صيدليات">
+                    صيدليات
+                </option>
+
+                <option value="حرفيين">
+                    حرفيين
+                </option>
+
+                <option value="محلات">
+                    محلات
+                </option>
+
+                <option value="مواصلات">
+                    مواصلات
+                </option>
+
+                <option value="وظائف">
+                    وظائف
+                </option>
+
+            </select>
+
+            <label>
+                رقم الهاتف
+            </label>
+
+            <input
+                id="phone"
+                type="tel"
+                required
+                placeholder="01000000000"
+            >
+
+            <label>
+                العنوان
+            </label>
+
+            <input
+                id="address"
+                required
+                placeholder="مثال: شارع السوق"
+            >
+
+            <label>
+                وصف الخدمة
+            </label>
+
+            <textarea
+                id="description"
+                required
+                placeholder="اكتب تفاصيل خدمتك"
+            ></textarea>
+
+            <button
+                type="submit"
+                class="publish-btn"
+            >
+                حفظ الخدمة
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+<!-- تفاصيل الخدمة -->
+
+<div
+    id="detailsModal"
+    class="modal hidden"
+>
+
+    <div class="modal-content">
+
+        <button
+            id="closeDetails"
+            class="close"
+        >
+            ×
+        </button>
+
+        <div id="detailsContent"></div>
+
+    </div>
+
+</div>
+
+
+<!-- تعديل الحساب -->
+
+<div
+    id="accountEditModal"
+    class="modal hidden"
+>
+
+    <div class="modal-content">
+
+        <button
+            id="closeAccountEdit"
+            class="close"
+        >
+            ×
+        </button>
+
+        <h2>
+            تعديل بيانات الحساب
+        </h2>
+
+        <form id="accountEditForm">
+
+            <label>
+                الاسم
+            </label>
+
+            <input
+                id="editAccountName"
+                required
+            >
+
+            <label>
+                رقم الهاتف
+            </label>
+
+            <input
+                id="editAccountPhone"
+                type="tel"
+                required
+            >
+
+            <button
+                type="submit"
+                class="publish-btn"
+            >
+                حفظ التعديلات
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+<footer>
+    © 2026 خدمة أهل البلد
+</footer>
+
+
+<script src="script.js"></script>
+
+</body>
+</html>
