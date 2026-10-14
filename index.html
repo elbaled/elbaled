@@ -1,34 +1,90 @@
+
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, maximum-scale=1.0">
-    <title>Train Driver Egypt | محاكي القطار المصري</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta name="theme-color" content="#101b2a">
+  <meta name="description" content="Train Driver Egypt - لعبة قيادة القطارات المصرية">
+  <title>Train Driver Egypt | سائق القطار المصري</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div id="game-ui">
-        <div class="top-panel">
-            <div class="info-box">
-                <span class="label">السرعة:</span>
-                <span id="speed-display">0</span> <span class="unit">كم/س</span>
-            </div>
-            <div class="info-box">
-                <span class="label">المحطة القادمة:</span>
-                <span id="station-display">الجيزة (1000م)</span>
-            </div>
-        </div>
-        
-        <div id="message-overlay">مرحباً بك في سكك حديد مصر!<br><span style="font-size: 16px;">استخدم الأسهم (W/S) أو الأزرار للقيادة</span></div>
+  <div id="game">
+    <div id="scene"></div>
 
-        <div class="controls">
-            <button id="btn-brake" class="control-btn brake">فرامل 🛑</button>
-            <button id="btn-accel" class="control-btn accel">تسريع 🚄</button>
+    <header class="topbar">
+      <div class="brand">
+        <span class="train-icon">🚆</span>
+        <div>
+          <h1>Train Driver Egypt</h1>
+          <small>محاكي قيادة القطارات المصرية</small>
         </div>
+      </div>
+      <button id="pauseBtn" class="icon-btn" aria-label="إيقاف مؤقت">Ⅱ</button>
+    </header>
+
+    <section class="hud">
+      <div class="panel speed-panel">
+        <span class="muted">السرعة الحالية</span>
+        <div class="speed-value"><span id="speed">0</span><small>كم/س</small></div>
+        <div class="speed-track"><div id="speedBar"></div></div>
+        <span class="muted">الحد الأقصى: 120 كم/س</span>
+      </div>
+
+      <div class="panel station-panel">
+        <span class="muted">المحطة القادمة</span>
+        <strong id="stationName">المنيا</strong>
+        <span id="stationDistance">المسافة: 3.0 كم</span>
+        <span id="mission">استعد للانطلاق</span>
+      </div>
+    </section>
+
+    <div id="toast" role="status">أهلاً بك في قطارات مصر</div>
+
+    <div class="bottom-ui">
+      <div class="control-row">
+        <button id="brakeBtn" class="control brake">
+          <span>▰</span><strong>فرامل</strong><small>اضغط للتوقف</small>
+        </button>
+
+        <button id="hornBtn" class="control horn">
+          <span>📢</span><strong>بوق القطار</strong><small>إصدار صوت</small>
+        </button>
+
+        <button id="accelBtn" class="control accel">
+          <span>▲</span><strong>تسارع</strong><small>اضغط للتحرك</small>
+        </button>
+      </div>
+
+      <div class="statusbar">
+        <span>⚙️ <b id="throttle">0%</b> قدرة المحرك</span>
+        <span>🛤️ <b id="distance">0.0</b> كم</span>
+        <button id="resetBtn">↻ إعادة الرحلة</button>
+      </div>
+
+      <div class="help">
+        الكمبيوتر: <kbd>↑</kbd> تسارع <kbd>↓</kbd> فرامل
+        <kbd>Space</kbd> بوق <kbd>P</kbd> إيقاف مؤقت
+      </div>
     </div>
 
-    <!-- استدعاء مكتبة Three.js -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <script src="script.js"></script>
+    <div id="pauseScreen" class="overlay hidden">
+      <div class="dialog">
+        <div class="big-train">🚆</div>
+        <h2>الرحلة متوقفة مؤقتًا</h2>
+        <p>استعد لاستكمال رحلتك عبر الأراضي المصرية.</p>
+        <button id="resumeBtn" class="primary-btn">استكمال الرحلة</button>
+      </div>
+    </div>
+
+    <div id="loading" class="loading">
+      <div class="loader"></div>
+      <h2>Train Driver Egypt</h2>
+      <p id="loadingText">جاري تجهيز القطار والمسار...</p>
+    </div>
+  </div>
+
+  <script type="module" src="game.js"></script>
 </body>
 </html>
