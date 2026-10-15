@@ -1,46 +1,49 @@
 
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap');
+
 :root {
   --navy: #101b2a;
-  --panel: rgba(14, 26, 42, .88);
-  --gold: #f2bd59;
-  --white: #f8fafc;
-  --muted: #b7c5d5;
-  --green: #30c98b;
-  --red: #ff6464;
+  --panel: rgba(12, 24, 39, .84);
+  --gold: #f4c76b;
+  --text: #f8fafc;
+  --muted: #bdc9d5;
 }
 
 * {
   box-sizing: border-box;
-  -webkit-tap-highlight-color: transparent;
 }
 
 html, body {
+  margin: 0;
   width: 100%;
   height: 100%;
-  margin: 0;
   overflow: hidden;
-  background: #9bd7ed;
-  color: var(--white);
-  font-family: Tahoma, Arial, sans-serif;
+  background: #9bd0e5;
+  color: var(--text);
+  font-family: Cairo, Tahoma, Arial, sans-serif;
+  touch-action: manipulation;
 }
 
 button {
   font: inherit;
   color: inherit;
   cursor: pointer;
-  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
 }
 
-#game, #scene {
-  position: fixed;
-  inset: 0;
+#game {
+  position: relative;
   width: 100%;
   height: 100%;
+  height: 100dvh;
+  overflow: hidden;
+  background: linear-gradient(#91cbe7, #d6e6d7 60%, #9bb86d);
 }
 
 #scene {
-  z-index: 0;
-  overflow: hidden;
+  position: absolute;
+  inset: 0;
+  z-index: 1;
 }
 
 #scene canvas {
@@ -49,22 +52,22 @@ button {
   height: 100%;
 }
 
-.topbar {
+.topbar, .hud, .view-hint,
+.bottom-ui, #toast {
   position: absolute;
+  z-index: 4;
+}
+
+.topbar {
   top: 0;
   left: 0;
   right: 0;
-  z-index: 2;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: max(12px, env(safe-area-inset-top)) 16px 12px;
-  background: linear-gradient(180deg, rgba(7, 17, 29, .8), transparent);
-  pointer-events: none;
-}
-
-.brand, .icon-btn {
-  pointer-events: auto;
+  gap: 10px;
+  padding: calc(12px + env(safe-area-inset-top)) 14px 10px;
+  background: linear-gradient(180deg, #07121fd9, transparent);
 }
 
 .brand {
@@ -77,49 +80,60 @@ button {
   font-size: 30px;
 }
 
-.brand h1 {
-  margin: 0 0 4px;
-  font-size: clamp(15px, 3vw, 21px);
-  letter-spacing: .2px;
+h1 {
+  font-size: clamp(14px, 2.2vw, 20px);
+  line-height: 1.2;
+  margin: 0;
+  font-weight: 900;
 }
 
 .brand small {
-  color: #e3eaf1;
+  display: block;
+  color: #d2dce5;
   font-size: 11px;
+  margin-top: 3px;
 }
 
 .icon-btn {
+  border: 1px solid #ffffff30;
+  background: #10243aeb;
+  border-radius: 12px;
   width: 42px;
   height: 42px;
-  border: 1px solid #ffffff44;
-  border-radius: 13px;
-  background: #102033dd;
-  font-size: 21px;
+  font-size: 19px;
 }
 
 .hud {
-  position: absolute;
-  z-index: 2;
-  top: 82px;
-  left: 14px;
-  right: 14px;
+  top: 85px;
+  left: 12px;
+  right: 12px;
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  gap: 10px;
+  gap: 8px;
   direction: ltr;
   pointer-events: none;
 }
 
 .panel {
   direction: rtl;
-  width: min(205px, 46%);
-  padding: 13px 15px;
-  border: 1px solid #ffffff28;
-  border-radius: 16px;
   background: var(--panel);
-  backdrop-filter: blur(10px);
-  box-shadow: 0 7px 25px #07111c25;
+  border: 1px solid #ffffff24;
+  backdrop-filter: blur(9px);
+  border-radius: 15px;
+  padding: 10px 12px;
+  box-shadow: 0 8px 28px #07132125;
+}
+
+.speed-panel {
+  width: 43%;
+  max-width: 210px;
+}
+
+.station-panel {
+  width: 49%;
+  max-width: 230px;
+  text-align: right;
 }
 
 .muted {
@@ -131,75 +145,88 @@ button {
 .speed-value {
   display: flex;
   align-items: baseline;
-  gap: 6px;
-  margin: 5px 0;
+  gap: 7px;
+  margin: 2px 0 5px;
 }
 
 .speed-value span {
-  font-size: clamp(29px, 6vw, 43px);
-  font-weight: 800;
+  font-size: 34px;
+  line-height: 1.2;
+  font-weight: 900;
   font-variant-numeric: tabular-nums;
 }
 
 .speed-value small {
   font-size: 11px;
-  color: var(--gold);
 }
 
 .speed-track {
   height: 5px;
-  overflow: hidden;
-  margin: 8px 0;
+  border-radius: 99px;
   background: #ffffff20;
-  border-radius: 20px;
+  overflow: hidden;
+  margin: 5px 0;
 }
 
-#speedBar {
-  width: 0;
+.speed-track div {
   height: 100%;
-  border-radius: inherit;
-  background: linear-gradient(90deg, #30c98b, #f2bd59, #ff6464);
-  transition: width .15s;
-}
-
-.station-panel {
-  text-align: right;
+  width: 0;
+  background: linear-gradient(90deg, #52d59a, #f4c76b, #ff6c61);
+  border-radius: 99px;
 }
 
 .station-panel strong {
   display: block;
-  margin: 5px 0;
-  color: var(--gold);
   font-size: 19px;
 }
 
-#stationDistance, #mission {
+.station-panel #stationDistance,
+.station-panel #mission {
   display: block;
-  margin-top: 7px;
   font-size: 11px;
+  margin-top: 4px;
 }
 
-#mission {
-  color: #8ee9c3;
+.station-panel #mission {
+  color: var(--gold);
+}
+
+.view-hint {
+  top: 190px;
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  font-size: 11px;
+  background: #0a1b2a88;
+  border: 1px solid #ffffff22;
+  border-radius: 99px;
+  padding: 5px 11px;
+}
+
+.signal-dot {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #63e3a3;
+  margin-left: 5px;
+  box-shadow: 0 0 8px #63e3a3;
 }
 
 #toast {
-  position: absolute;
-  z-index: 3;
-  top: 170px;
+  top: 235px;
   left: 50%;
-  width: max-content;
-  max-width: 90%;
   transform: translateX(-50%);
-  padding: 10px 16px;
-  border: 1px solid #ffffff22;
-  border-radius: 30px;
-  background: #101b2ae8;
+  opacity: 0;
+  pointer-events: none;
+  background: #0c1a2ceb;
+  border: 1px solid #ffffff25;
+  border-radius: 12px;
+  padding: 9px 14px;
   font-size: 12px;
   text-align: center;
-  opacity: 0;
+  max-width: 90%;
   transition: opacity .2s;
-  pointer-events: none;
 }
 
 #toast.show {
@@ -207,49 +234,47 @@ button {
 }
 
 .bottom-ui {
-  position: absolute;
-  z-index: 2;
   bottom: 0;
   left: 0;
   right: 0;
-  padding: 15px 14px max(12px, env(safe-area-inset-bottom));
-  background: linear-gradient(0deg, rgba(7, 17, 29, .97), rgba(7, 17, 29, .76), transparent);
+  padding: 22px 12px calc(8px + env(safe-area-inset-bottom));
+  background: linear-gradient(0deg, #050e18f5, #050e18b8 70%, transparent);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
 .control-row {
-  display: flex;
-  justify-content: center;
-  align-items: stretch;
-  gap: 10px;
-  max-width: 580px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 8px;
+  max-width: 720px;
+  width: 100%;
   margin: 0 auto;
 }
 
 .control {
-  flex: 1;
-  min-width: 0;
-  min-height: 83px;
+  min-height: 70px;
+  border: 1px solid #ffffff26;
+  border-radius: 15px;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
   align-items: center;
-  gap: 4px;
-  border: 1px solid #ffffff35;
-  border-radius: 17px;
-  background: #17283be8;
-  box-shadow: 0 5px 14px #0003;
+  justify-content: center;
+  flex-direction: column;
+  gap: 1px;
   user-select: none;
+  touch-action: none;
   transition: transform .1s, filter .1s;
 }
 
 .control:active, .control.active {
-  transform: scale(.96);
+  transform: scale(.97);
   filter: brightness(1.3);
 }
 
-.control > span {
-  font-size: 22px;
-  font-weight: 800;
+.control .control-symbol {
+  font-size: 20px;
+  line-height: 1.2;
 }
 
 .control strong {
@@ -257,91 +282,74 @@ button {
 }
 
 .control small {
-  color: var(--muted);
   font-size: 10px;
-}
-
-.accel {
-  border-color: #30c98b88;
-  background: linear-gradient(150deg, #126c50, #124335);
-}
-
-.accel > span {
-  color: #76f3be;
+  color: #d3dce5;
 }
 
 .brake {
-  border-color: #ff646488;
-  background: linear-gradient(150deg, #823b40, #49272f);
-}
-
-.brake > span {
-  color: #ffaaaa;
+  background: linear-gradient(135deg, #873b37ed, #542e35f2);
 }
 
 .horn {
-  border-color: #f2bd5977;
+  background: linear-gradient(135deg, #4c5660ed, #27384af2);
 }
 
-.horn > span {
-  font-size: 21px;
+.accel {
+  background: linear-gradient(135deg, #1c8469ed, #155344f2);
 }
 
 .statusbar {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  gap: 8px;
-  max-width: 580px;
-  margin: 12px auto 0;
-  padding: 10px 12px;
-  border: 1px solid #ffffff15;
-  border-radius: 12px;
-  background: #ffffff0b;
-  color: #dce6ef;
+  justify-content: space-between;
+  gap: 7px;
+  max-width: 720px;
+  width: 100%;
+  margin: 0 auto;
+  color: #d7e0e8;
   font-size: 11px;
 }
 
 .statusbar b {
-  color: var(--gold);
+  color: white;
 }
 
-#resetBtn {
-  border: 0;
-  padding: 7px 9px;
+.statusbar button {
+  background: #ffffff13;
+  border: 1px solid #ffffff2a;
   border-radius: 9px;
-  background: #ffffff16;
+  padding: 6px 9px;
   font-size: 11px;
 }
 
 .help {
-  margin-top: 10px;
-  color: #bdcad7;
+  max-width: 720px;
+  width: 100%;
+  margin: 0 auto;
   text-align: center;
+  color: #b8c4cf;
   font-size: 10px;
 }
 
 kbd {
   display: inline-block;
-  min-width: 20px;
-  margin: 0 2px;
-  padding: 3px 5px;
-  border: 1px solid #ffffff30;
-  border-radius: 5px;
-  background: #ffffff13;
+  background: #ffffff15;
+  border: 1px solid #ffffff24;
+  border-radius: 4px;
+  padding: 0 4px;
   color: white;
 }
 
 .overlay, .loading {
   position: absolute;
-  z-index: 10;
   inset: 0;
+  z-index: 10;
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
+  background: #050d23c9;
+  backdrop-filter: blur(7px);
   padding: 20px;
-  background: #081321d9;
-  backdrop-filter: blur(9px);
 }
 
 .hidden {
@@ -349,58 +357,57 @@ kbd {
 }
 
 .dialog {
-  width: min(360px, 100%);
-  padding: 28px 22px;
-  border: 1px solid #ffffff24;
-  border-radius: 22px;
-  background: #142338;
   text-align: center;
+  width: min(360px, 100%);
+  border: 1px solid #ffffff20;
+  border-radius: 22px;
+  padding: 28px 22px;
+  background: linear-gradient(145deg, #172a3d, #0b1726);
 }
 
 .big-train {
-  font-size: 52px;
+  font-size: 48px;
 }
 
 .dialog h2 {
-  font-size: 21px;
+  font-size: 20px;
 }
 
 .dialog p {
-  color: var(--muted);
   font-size: 13px;
-  line-height: 1.8;
+  color: #c2cfdb;
 }
 
 .primary-btn {
-  width: 100%;
-  margin-top: 12px;
-  padding: 14px;
+  background: linear-gradient(135deg, #f5d17e, #d89b37);
   border: 0;
+  color: #172131;
+  font-weight: 900;
   border-radius: 12px;
-  background: var(--gold);
-  color: #192131;
-  font-weight: 800;
+  padding: 11px 20px;
 }
 
 .loading {
+  z-index: 20;
   flex-direction: column;
-  background: #101b2a;
   text-align: center;
+  background: #101b2a;
+  gap: 8px;
 }
 
 .loading h2 {
-  margin-bottom: 3px;
+  margin: 6px 0 0;
 }
 
 .loading p {
-  color: var(--muted);
   font-size: 13px;
+  color: #e1e8ef;
 }
 
 .loader {
-  width: 45px;
-  height: 45px;
-  border: 4px solid #ffffff22;
+  width: 42px;
+  height: 42px;
+  border: 4px solid #ffffff25;
   border-top-color: var(--gold);
   border-radius: 50%;
   animation: spin .8s linear infinite;
@@ -410,86 +417,68 @@ kbd {
   to { transform: rotate(360deg); }
 }
 
-@media (max-width: 430px) {
+@media (max-width: 420px) {
   .topbar {
-    padding-left: 11px;
-    padding-right: 11px;
+    padding-left: 10px;
+    padding-right: 10px;
   }
 
   .hud {
     top: 75px;
-    left: 9px;
-    right: 9px;
-    gap: 7px;
+    left: 8px;
+    right: 8px;
   }
 
   .panel {
-    padding: 10px;
-    border-radius: 13px;
+    padding: 9px;
+  }
+
+  .speed-value span {
+    font-size: 29px;
   }
 
   .station-panel strong {
-    font-size: 16px;
+    font-size: 17px;
+  }
+
+  .view-hint {
+    top: 177px;
+    font-size: 10px;
   }
 
   .bottom-ui {
-    padding-left: 9px;
-    padding-right: 9px;
-  }
-
-  .control-row {
-    gap: 7px;
+    padding-left: 8px;
+    padding-right: 8px;
   }
 
   .control {
-    min-height: 76px;
-    border-radius: 13px;
-  }
-
-  .control strong {
-    font-size: 12px;
+    min-height: 65px;
   }
 
   .control small {
     font-size: 9px;
   }
-
-  .statusbar {
-    font-size: 10px;
-  }
-
-  .help {
-    line-height: 2;
-  }
 }
 
-@media (max-height: 520px) {
+@media (max-height: 620px) {
   .hud {
     top: 65px;
   }
 
-  .panel {
-    padding: 8px 11px;
+  .view-hint {
+    top: 150px;
   }
 
   .bottom-ui {
-    padding-top: 7px;
+    padding-top: 10px;
+    gap: 5px;
   }
 
   .control {
-    min-height: 57px;
+    min-height: 53px;
   }
 
-  .control > span {
-    font-size: 17px;
-  }
-
-  .control small, .help {
-    display: none;
-  }
-
-  .statusbar {
-    margin-top: 6px;
-    padding: 6px 9px;
+  .speed-value span {
+    font-size: 26px;
   }
 }
